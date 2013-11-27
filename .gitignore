@@ -2,3 +2,5 @@
 *.jpg
 *.jpeg
 *.gif
+sprites/*
+!sprites/README.md

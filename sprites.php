@@ -16,12 +16,12 @@ class images_to_sprite {
 	
 	
 	// Allowed File Types
-	var $filetypes	= array
+	var $filetypes  = array
 	(
-		'jpg'	=> TRUE,
-		'png'	=> TRUE,
-		'jpeg'	=> TRUE,
-		'gif'	=> TRUE
+		'jpg'   => TRUE,
+		'png'   => TRUE,
+		'jpeg'  => TRUE,
+		'gif'   => TRUE
 	);
 	
 	
@@ -76,8 +76,8 @@ class images_to_sprite {
 		{
 			while ( FALSE !== ( $file = readdir( $handle ) ) )
 			{
-				$split	= explode( '.', $file );
-				$ext	= end( $split );
+				$split = explode( '.', $file );
+				$ext   = end( $split );
 				
 				// Ignore NON-Allowed Files
 				if( $file == '.' OR !isset( $this->filetypes[ $ext ] ) OR !$this->filetypes[ $ext ] )
@@ -203,10 +203,10 @@ class images_to_sprite {
 		foreach( $this->files as $key => $file )
 		{
 			$f  = $file['file'];
-			$f	= substr( str_replace( array_keys( $this->filetypes ), '', strtolower( $f ) ), 0, -1 );
-			$f	= preg_replace( '/[0-9]+/', '', $f );
-			$f	= preg_replace( '/[\_\s]+/', '-', trim( $f ) );
-			$f	= str_replace( '--', '-', $f );
+			$f  = substr( str_replace( array_keys( $this->filetypes ), '', strtolower( $f ) ), 0, -1 );
+			$f  = preg_replace( '/[0-9]+/', '', $f );
+			$f  = preg_replace( '/[\_\s]+/', '-', trim( $f ) );
+			$f  = str_replace( '--', '-', $f );
 			$w  = explode( '-', $f );
 			
 			foreach( $w as $ww )
@@ -222,7 +222,7 @@ class images_to_sprite {
 		
 		// Make Friendly CSS Class Names for each File
 		$in  = array();
-		$et	 = 1;
+		$et  = 1;
 		foreach( $this->files as $key => $file )
 		{
 			$f  = $file['file'];
@@ -230,7 +230,7 @@ class images_to_sprite {
 			$nn = css_class( $nn, 'dash', TRUE );
 			$nn = preg_replace( '/[0-9]+/', '', trim( $nn ) );
 			$nn = preg_replace( '/[\_]+/', '-', $nn );
-			$nn	= str_replace( '--', '-', $nn );
+			$nn = str_replace( '--', '-', $nn );
 			$ad = FALSE;
 			
 			// If there is a word that has been repeated more than 10% times of files count, remove it.
@@ -293,20 +293,20 @@ class images_to_sprite {
 			// Next Row Please!
 			if ( $xcounter >= $cols )
 			{
-				$xcounter	= 0;
+				$xcounter = 0;
 			}
 			
-			$fname	= $file['file'];
-			$fx		= $file['x'];
-			$fy		= $file['y'];
-			$nname	= $ns[ $fname ];
-			$cx		= $bigx * $xcounter;
-			$cy		= $bigy * $ycounter;
-			$calcX	= $cx == 0 ? 0 : '-'. $cx . 'px';
-			$calcY	= $cy == 0 ? 0 : '-'. $cy . 'px';
+			$fname  = $file['file'];
+			$fx     = $file['x'];
+			$fy     = $file['y'];
+			$nname  = $ns[ $fname ];
+			$cx     = $bigx * $xcounter;
+			$cy     = $bigy * $ycounter;
+			$calcX  = $cx == 0 ? 0 : '-'. $cx . 'px';
+			$calcY  = $cy == 0 ? 0 : '-'. $cy . 'px';
 			
-			$posX	= $bigx != $fx ? ( ($bigx / 2) - ($fx / 2) ) : 0;
-			$posY	= $bigy != $fx ? ( ($bigy / 2) - ($fy / 2) ) : 0;
+			$posX   = $bigx != $fx ? ( ($bigx / 2) - ($fx / 2) ) : 0;
+			$posY   = $bigy != $fx ? ( ($bigy / 2) - ($fy / 2) ) : 0;
 			
 			// Write CSS Style
 			fwrite
