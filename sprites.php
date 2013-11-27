@@ -93,6 +93,7 @@ class images_to_sprite {
 				$this->files[$file] = array
 				(
 					'file' => $file,
+					'ext'  => strtolower( $ext ),
 					'x'    => $size[0],
 					'y'    => $size[1]
 				);
@@ -297,6 +298,8 @@ class images_to_sprite {
 			}
 			
 			$fname  = $file['file'];
+			$ex     = ( $file['ext'] == 'jpg' ) ? 'jpeg' : $file['ext'];
+			$fn		= 'imagecreatefrom' . $ex;
 			$fx     = $file['x'];
 			$fy     = $file['y'];
 			$nname  = $ns[ $fname ];
@@ -307,6 +310,17 @@ class images_to_sprite {
 			
 			$posX   = $bigx != $fx ? ( ($bigx / 2) - ($fx / 2) ) : 0;
 			$posY   = $bigy != $fx ? ( ($bigy / 2) - ($fy / 2) ) : 0;
+			
+			// In GD We Trust
+			if ( function_exists( $fn ) )
+			{
+				$im2    = $fn( $this->folder . '/' . $fname );
+				imagecopy( $im, $im2, $cx + $posX, $cy + $posY, 0, 0, $fx, $fy );
+			}else
+			{
+				// File Type Not Supported, There is Nothing We Can Do!
+				continue;
+			}
 			
 			// Write CSS Style
 			fwrite
@@ -338,10 +352,6 @@ class images_to_sprite {
 					"</div>"
 				);
 			}
-			
-			// In GD We Trust
-			$im2    = imagecreatefrompng( $this->folder . '/' . $fname );
-			imagecopy( $im, $im2, $cx + $posX, $cy + $posY, 0, 0, $fx, $fy );
 			
 			// Increase X-Axis Counter
 			$xcounter++;
