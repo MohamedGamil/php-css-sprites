@@ -299,7 +299,7 @@ class images_to_sprite {
 			
 			$fname  = $file['file'];
 			$ex     = ( $file['ext'] == 'jpg' ) ? 'jpeg' : $file['ext'];
-			$fn		= 'imagecreatefrom' . $ex;
+			$fn     = 'imagecreatefrom' . $ex;
 			$fx     = $file['x'];
 			$fy     = $file['y'];
 			$nname  = $ns[ $fname ];
